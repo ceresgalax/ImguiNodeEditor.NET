@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    
+    <PropertyGroup>
+        <Description>A .NET wrapper for the ImguiNodeEditor library.</Description>
+        <Authors>ceresgalax</Authors>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <DebugType>portable</DebugType>
+        <AssemblyName>ImguiNodeEditor.NET</AssemblyName>
+        <PackageId>ImguiNodeEditor.NET</PackageId>
+        <PackagePrereleaseIdentifier></PackagePrereleaseIdentifier>
+        <PackageVersion>$(AssemblyVersion)$(PackagePrereleaseIdentifier)</PackageVersion>
+        <PackageTags>ImguiNodeEditor ImGui ImGui.NET Immediate Mode GUI</PackageTags>
+        <PackageProjectUrl>https://github.com/ceresgalax/ImguiNodeEditor.NET</PackageProjectUrl>
+        <DocumentationFile Condition="'$(Configuration)' == 'Release'">$(OutputPath)\ImguiNodeEditor.NET.xml</DocumentationFile>
+        <RootNamespace>ImguiNodeEditorNET</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\ImGui.NET\src\ImGui.NET\ImGui.NET.csproj" />
+    </ItemGroup>
+
+</Project>
