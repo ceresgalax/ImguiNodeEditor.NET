@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Project>
+    <PropertyGroup>
+        <ParentBreadcrumb>..\submoduleproject.txt</ParentBreadcrumb>
+    </PropertyGroup>
+    
+    <Import Condition="Exists($(ParentBreadcrumb))" Project="..\Directory.Build.props"/>
+    
+    <PropertyGroup Condition="!Exists($(ParentBreadcrumb))">
+        <SubmoduleDependencyRoot>$(MSBuildThisFileDirectory)</SubmoduleDependencyRoot>
+    </PropertyGroup>
+</Project>

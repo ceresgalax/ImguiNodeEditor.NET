@@ -17,8 +17,11 @@
         <RootNamespace>ImguiNodeEditorNET</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(ImGuiNetProjectPath)' == ''">
       <ProjectReference Include="..\ImGui.NET\src\ImGui.NET\ImGui.NET.csproj" />
     </ItemGroup>
-
+    <ItemGroup Condition="'$(ImGuiNetProjectPath)' != ''">
+        <ProjectReference Include="$(ImGuiNetProjectPath)\src\ImGui.NET\ImGui.NET.csproj" />
+    </ItemGroup>
+    
 </Project>
