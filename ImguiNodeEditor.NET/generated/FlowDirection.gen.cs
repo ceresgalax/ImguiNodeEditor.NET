@@ -1,6 +1,6 @@
 namespace AxNodeEditorNET
 {
-    public enum axNodeEditor_FlowDirection
+    public enum FlowDirection
     {
         Forward = 0,
         Backward = 1,

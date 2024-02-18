@@ -6,7 +6,7 @@ using ImGuiNET;
 
 namespace AxNodeEditorNET
 {
-    public unsafe partial struct axNodeEditor_Style
+    public unsafe partial struct Style
     {
         public Vector4 NodePadding;
         public float NodeRounding;
@@ -35,16 +35,34 @@ namespace AxNodeEditorNET
         public float GroupBorderWidth;
         public float HighlightConnectedLinks;
         public float SnapLinkToPinDir;
-        public ImVec4[19] Colors;
+        public Vector4 Colors_0;
+        public Vector4 Colors_1;
+        public Vector4 Colors_2;
+        public Vector4 Colors_3;
+        public Vector4 Colors_4;
+        public Vector4 Colors_5;
+        public Vector4 Colors_6;
+        public Vector4 Colors_7;
+        public Vector4 Colors_8;
+        public Vector4 Colors_9;
+        public Vector4 Colors_10;
+        public Vector4 Colors_11;
+        public Vector4 Colors_12;
+        public Vector4 Colors_13;
+        public Vector4 Colors_14;
+        public Vector4 Colors_15;
+        public Vector4 Colors_16;
+        public Vector4 Colors_17;
+        public Vector4 Colors_18;
     }
-    public unsafe partial struct axNodeEditor_StylePtr
+    public unsafe partial struct StylePtr
     {
-        public axNodeEditor_Style* NativePtr { get; }
-        public axNodeEditor_StylePtr(axNodeEditor_Style* nativePtr) => NativePtr = nativePtr;
-        public axNodeEditor_StylePtr(IntPtr nativePtr) => NativePtr = (axNodeEditor_Style*)nativePtr;
-        public static implicit operator axNodeEditor_StylePtr(axNodeEditor_Style* nativePtr) => new axNodeEditor_StylePtr(nativePtr);
-        public static implicit operator axNodeEditor_Style* (axNodeEditor_StylePtr wrappedPtr) => wrappedPtr.NativePtr;
-        public static implicit operator axNodeEditor_StylePtr(IntPtr nativePtr) => new axNodeEditor_StylePtr(nativePtr);
+        public Style* NativePtr { get; }
+        public StylePtr(Style* nativePtr) => NativePtr = nativePtr;
+        public StylePtr(IntPtr nativePtr) => NativePtr = (Style*)nativePtr;
+        public static implicit operator StylePtr(Style* nativePtr) => new StylePtr(nativePtr);
+        public static implicit operator Style* (StylePtr wrappedPtr) => wrappedPtr.NativePtr;
+        public static implicit operator StylePtr(IntPtr nativePtr) => new StylePtr(nativePtr);
         public ref Vector4 NodePadding => ref Unsafe.AsRef<Vector4>(&NativePtr->NodePadding);
         public ref float NodeRounding => ref Unsafe.AsRef<float>(&NativePtr->NodeRounding);
         public ref float NodeBorderWidth => ref Unsafe.AsRef<float>(&NativePtr->NodeBorderWidth);
@@ -72,6 +90,6 @@ namespace AxNodeEditorNET
         public ref float GroupBorderWidth => ref Unsafe.AsRef<float>(&NativePtr->GroupBorderWidth);
         public ref float HighlightConnectedLinks => ref Unsafe.AsRef<float>(&NativePtr->HighlightConnectedLinks);
         public ref float SnapLinkToPinDir => ref Unsafe.AsRef<float>(&NativePtr->SnapLinkToPinDir);
-        public ref ImVec4[19] Colors => ref Unsafe.AsRef<ImVec4[19]>(&NativePtr->Colors);
+        public RangeAccessor<Vector4> Colors => new RangeAccessor<Vector4>(&NativePtr->Colors_0, 19);
     }
 }

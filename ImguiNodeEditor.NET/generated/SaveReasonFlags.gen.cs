@@ -1,7 +1,7 @@
 namespace AxNodeEditorNET
 {
     [System.Flags]
-    public enum axNodeEditor_SaveReasonFlags
+    public enum SaveReasonFlags
     {
         None = 0,
         Navigation = 1,

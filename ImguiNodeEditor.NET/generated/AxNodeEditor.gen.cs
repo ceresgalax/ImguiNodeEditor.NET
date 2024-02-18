@@ -43,7 +43,7 @@ namespace AxNodeEditorNET
         {
             fixed (Vector4* native_color = &color)
             {
-                byte ret = AxNodeEditorNative.axNodeEditor_AcceptNewItem(native_color, thickness);
+                byte ret = AxNodeEditorNative.axNodeEditor_AcceptNewItem1(native_color, thickness);
                 return ret != 0;
             }
         }
@@ -103,16 +103,16 @@ namespace AxNodeEditorNET
             byte ret = AxNodeEditorNative.axNodeEditor_BeginDelete();
             return ret != 0;
         }
-        public static bool BeginGroupHint(axNodeEditor_NodeId nodeId)
+        public static bool BeginGroupHint(NodeId nodeId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_BeginGroupHint(nodeId);
             return ret != 0;
         }
-        public static void BeginNode(axNodeEditor_NodeId id)
+        public static void BeginNode(NodeId id)
         {
             AxNodeEditorNative.axNodeEditor_BeginNode(id);
         }
-        public static void BeginPin(axNodeEditor_PinId id, axNodeEditor_PinKind kind)
+        public static void BeginPin(PinId id, PinKind kind)
         {
             AxNodeEditorNative.axNodeEditor_BeginPin(id, kind);
         }
@@ -121,14 +121,14 @@ namespace AxNodeEditorNET
             byte ret = AxNodeEditorNative.axNodeEditor_BeginShortcut();
             return ret != 0;
         }
-        public static int BreakLinks(axNodeEditor_NodeId nodeId)
+        public static int BreakLinks(NodeId nodeId)
         {
             int ret = AxNodeEditorNative.axNodeEditor_BreakLinks(nodeId);
             return ret;
         }
-        public static int BreakLinks(axNodeEditor_PinId pinId)
+        public static int BreakLinks(PinId pinId)
         {
-            int ret = AxNodeEditorNative.axNodeEditor_BreakLinks(pinId);
+            int ret = AxNodeEditorNative.axNodeEditor_BreakLinks1(pinId);
             return ret;
         }
         public static Vector2 CanvasToScreen(ref Vector2 pos)
@@ -139,7 +139,7 @@ namespace AxNodeEditorNET
                 return ret;
             }
         }
-        public static void CenterNodeOnScreen(axNodeEditor_NodeId nodeId)
+        public static void CenterNodeOnScreen(NodeId nodeId)
         {
             AxNodeEditorNative.axNodeEditor_CenterNodeOnScreen(nodeId);
         }
@@ -147,38 +147,35 @@ namespace AxNodeEditorNET
         {
             AxNodeEditorNative.axNodeEditor_ClearSelection();
         }
-        public static axNodeEditor_EditorContext* CreateEditor(ref axNodeEditor_Config config)
+        public static IntPtr CreateEditor(ref Config config)
         {
-            fixed (axNodeEditor_Config* native_config = &config)
+            fixed (Config* native_config = &config)
             {
-                axNodeEditor_EditorContext* ret = AxNodeEditorNative.axNodeEditor_CreateEditor(native_config);
+                IntPtr ret = AxNodeEditorNative.axNodeEditor_CreateEditor(native_config);
                 return ret;
             }
         }
-        public static bool DeleteLink(axNodeEditor_LinkId linkId)
+        public static bool DeleteLink(LinkId linkId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_DeleteLink(linkId);
             return ret != 0;
         }
-        public static bool DeleteNode(axNodeEditor_NodeId nodeId)
+        public static bool DeleteNode(NodeId nodeId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_DeleteNode(nodeId);
             return ret != 0;
         }
-        public static void DeselectLink(axNodeEditor_LinkId linkId)
+        public static void DeselectLink(LinkId linkId)
         {
             AxNodeEditorNative.axNodeEditor_DeselectLink(linkId);
         }
-        public static void DeselectNode(axNodeEditor_NodeId nodeId)
+        public static void DeselectNode(NodeId nodeId)
         {
             AxNodeEditorNative.axNodeEditor_DeselectNode(nodeId);
         }
-        public static void DestroyEditor(ref axNodeEditor_EditorContext ctx)
+        public static void DestroyEditor(IntPtr ctx)
         {
-            fixed (axNodeEditor_EditorContext* native_ctx = &ctx)
-            {
-                AxNodeEditorNative.axNodeEditor_DestroyEditor(native_ctx);
-            }
+            AxNodeEditorNative.axNodeEditor_DestroyEditor(ctx);
         }
         public static void EnableShortcuts(bool enable)
         {
@@ -213,21 +210,21 @@ namespace AxNodeEditorNET
         {
             AxNodeEditorNative.axNodeEditor_EndShortcut();
         }
-        public static void Flow(axNodeEditor_LinkId linkId, axNodeEditor_FlowDirection direction)
+        public static void Flow(LinkId linkId, FlowDirection direction)
         {
             AxNodeEditorNative.axNodeEditor_Flow(linkId, direction);
         }
-        public static int GetActionContextLinks(ref axNodeEditor_LinkId links, int size)
+        public static int GetActionContextLinks(ref LinkId links, int size)
         {
-            fixed (axNodeEditor_LinkId* native_links = &links)
+            fixed (LinkId* native_links = &links)
             {
                 int ret = AxNodeEditorNative.axNodeEditor_GetActionContextLinks(native_links, size);
                 return ret;
             }
         }
-        public static int GetActionContextNodes(ref axNodeEditor_NodeId nodes, int size)
+        public static int GetActionContextNodes(ref NodeId nodes, int size)
         {
-            fixed (axNodeEditor_NodeId* native_nodes = &nodes)
+            fixed (NodeId* native_nodes = &nodes)
             {
                 int ret = AxNodeEditorNative.axNodeEditor_GetActionContextNodes(native_nodes, size);
                 return ret;
@@ -248,17 +245,14 @@ namespace AxNodeEditorNET
             int ret = AxNodeEditorNative.axNodeEditor_GetBackgroundDoubleClickButtonIndex();
             return ret;
         }
-        public static axNodeEditor_Config* GetConfig(ref axNodeEditor_EditorContext ctx)
+        public static Config* GetConfig(IntPtr ctx)
         {
-            fixed (axNodeEditor_EditorContext* native_ctx = &ctx)
-            {
-                axNodeEditor_Config* ret = AxNodeEditorNative.axNodeEditor_GetConfig(native_ctx);
-                return ret;
-            }
+            Config* ret = AxNodeEditorNative.axNodeEditor_GetConfig(ctx);
+            return ret;
         }
-        public static axNodeEditor_EditorContext* GetCurrentEditor()
+        public static IntPtr GetCurrentEditor()
         {
-            axNodeEditor_EditorContext* ret = AxNodeEditorNative.axNodeEditor_GetCurrentEditor();
+            IntPtr ret = AxNodeEditorNative.axNodeEditor_GetCurrentEditor();
             return ret;
         }
         public static float GetCurrentZoom()
@@ -266,19 +260,19 @@ namespace AxNodeEditorNET
             float ret = AxNodeEditorNative.axNodeEditor_GetCurrentZoom();
             return ret;
         }
-        public static axNodeEditor_LinkId GetDoubleClickedLink()
+        public static LinkId GetDoubleClickedLink()
         {
-            axNodeEditor_LinkId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedLink();
+            LinkId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedLink();
             return ret;
         }
-        public static axNodeEditor_NodeId GetDoubleClickedNode()
+        public static NodeId GetDoubleClickedNode()
         {
-            axNodeEditor_NodeId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedNode();
+            NodeId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedNode();
             return ret;
         }
-        public static axNodeEditor_PinId GetDoubleClickedPin()
+        public static PinId GetDoubleClickedPin()
         {
-            axNodeEditor_PinId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedPin();
+            PinId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedPin();
             return ret;
         }
         public static Vector2 GetGroupMax()
@@ -301,33 +295,33 @@ namespace AxNodeEditorNET
             ImDrawList* ret = AxNodeEditorNative.axNodeEditor_GetHintForegroundDrawList();
             return new ImDrawListPtr(ret);
         }
-        public static axNodeEditor_LinkId GetHoveredLink()
+        public static LinkId GetHoveredLink()
         {
-            axNodeEditor_LinkId ret = AxNodeEditorNative.axNodeEditor_GetHoveredLink();
+            LinkId ret = AxNodeEditorNative.axNodeEditor_GetHoveredLink();
             return ret;
         }
-        public static axNodeEditor_NodeId GetHoveredNode()
+        public static NodeId GetHoveredNode()
         {
-            axNodeEditor_NodeId ret = AxNodeEditorNative.axNodeEditor_GetHoveredNode();
+            NodeId ret = AxNodeEditorNative.axNodeEditor_GetHoveredNode();
             return ret;
         }
-        public static axNodeEditor_PinId GetHoveredPin()
+        public static PinId GetHoveredPin()
         {
-            axNodeEditor_PinId ret = AxNodeEditorNative.axNodeEditor_GetHoveredPin();
+            PinId ret = AxNodeEditorNative.axNodeEditor_GetHoveredPin();
             return ret;
         }
-        public static bool GetLinkPins(axNodeEditor_LinkId linkId, ref axNodeEditor_PinId startPinId, ref axNodeEditor_PinId endPinId)
+        public static bool GetLinkPins(LinkId linkId, ref PinId startPinId, ref PinId endPinId)
         {
-            fixed (axNodeEditor_PinId* native_startPinId = &startPinId)
+            fixed (PinId* native_startPinId = &startPinId)
             {
-                fixed (axNodeEditor_PinId* native_endPinId = &endPinId)
+                fixed (PinId* native_endPinId = &endPinId)
                 {
                     byte ret = AxNodeEditorNative.axNodeEditor_GetLinkPins(linkId, native_startPinId, native_endPinId);
                     return ret != 0;
                 }
             }
         }
-        public static ImDrawListPtr GetNodeBackgroundDrawList(axNodeEditor_NodeId nodeId)
+        public static ImDrawListPtr GetNodeBackgroundDrawList(NodeId nodeId)
         {
             ImDrawList* ret = AxNodeEditorNative.axNodeEditor_GetNodeBackgroundDrawList(nodeId);
             return new ImDrawListPtr(ret);
@@ -337,24 +331,24 @@ namespace AxNodeEditorNET
             int ret = AxNodeEditorNative.axNodeEditor_GetNodeCount();
             return ret;
         }
-        public static Vector2 GetNodePosition(axNodeEditor_NodeId nodeId)
+        public static Vector2 GetNodePosition(NodeId nodeId)
         {
             Vector2 ret = AxNodeEditorNative.axNodeEditor_GetNodePosition(nodeId);
             return ret;
         }
-        public static Vector2 GetNodeSize(axNodeEditor_NodeId nodeId)
+        public static Vector2 GetNodeSize(NodeId nodeId)
         {
             Vector2 ret = AxNodeEditorNative.axNodeEditor_GetNodeSize(nodeId);
             return ret;
         }
-        public static float GetNodeZPosition(axNodeEditor_NodeId nodeId)
+        public static float GetNodeZPosition(NodeId nodeId)
         {
             float ret = AxNodeEditorNative.axNodeEditor_GetNodeZPosition(nodeId);
             return ret;
         }
-        public static int GetOrderedNodeIds(ref axNodeEditor_NodeId nodes, int size)
+        public static int GetOrderedNodeIds(ref NodeId nodes, int size)
         {
-            fixed (axNodeEditor_NodeId* native_nodes = &nodes)
+            fixed (NodeId* native_nodes = &nodes)
             {
                 int ret = AxNodeEditorNative.axNodeEditor_GetOrderedNodeIds(native_nodes, size);
                 return ret;
@@ -365,17 +359,17 @@ namespace AxNodeEditorNET
             Vector2 ret = AxNodeEditorNative.axNodeEditor_GetScreenSize();
             return ret;
         }
-        public static int GetSelectedLinks(ref axNodeEditor_LinkId links, int size)
+        public static int GetSelectedLinks(ref LinkId links, int size)
         {
-            fixed (axNodeEditor_LinkId* native_links = &links)
+            fixed (LinkId* native_links = &links)
             {
                 int ret = AxNodeEditorNative.axNodeEditor_GetSelectedLinks(native_links, size);
                 return ret;
             }
         }
-        public static int GetSelectedNodes(ref axNodeEditor_NodeId nodes, int size)
+        public static int GetSelectedNodes(ref NodeId nodes, int size)
         {
-            fixed (axNodeEditor_NodeId* native_nodes = &nodes)
+            fixed (NodeId* native_nodes = &nodes)
             {
                 int ret = AxNodeEditorNative.axNodeEditor_GetSelectedNodes(native_nodes, size);
                 return ret;
@@ -386,12 +380,12 @@ namespace AxNodeEditorNET
             int ret = AxNodeEditorNative.axNodeEditor_GetSelectedObjectCount();
             return ret;
         }
-        public static axNodeEditor_Style* GetStyle()
+        public static Style* GetStyle()
         {
-            axNodeEditor_Style* ret = AxNodeEditorNative.axNodeEditor_GetStyle();
+            Style* ret = AxNodeEditorNative.axNodeEditor_GetStyle();
             return ret;
         }
-        public static string GetStyleColorName(axNodeEditor_StyleColor colorIndex)
+        public static string GetStyleColorName(StyleColor colorIndex)
         {
             byte* ret = AxNodeEditorNative.axNodeEditor_GetStyleColorName(colorIndex);
             return Util.StringFromPtr(ret);
@@ -403,14 +397,14 @@ namespace AxNodeEditorNET
                 AxNodeEditorNative.axNodeEditor_Group(native_size);
             }
         }
-        public static bool HasAnyLinks(axNodeEditor_NodeId nodeId)
+        public static bool HasAnyLinks(NodeId nodeId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_HasAnyLinks(nodeId);
             return ret != 0;
         }
-        public static bool HasAnyLinks(axNodeEditor_PinId pinId)
+        public static bool HasAnyLinks(PinId pinId)
         {
-            byte ret = AxNodeEditorNative.axNodeEditor_HasAnyLinks(pinId);
+            byte ret = AxNodeEditorNative.axNodeEditor_HasAnyLinks1(pinId);
             return ret != 0;
         }
         public static bool HasSelectionChanged()
@@ -433,12 +427,12 @@ namespace AxNodeEditorNET
             byte ret = AxNodeEditorNative.axNodeEditor_IsBackgroundDoubleClicked();
             return ret != 0;
         }
-        public static bool IsLinkSelected(axNodeEditor_LinkId linkId)
+        public static bool IsLinkSelected(LinkId linkId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_IsLinkSelected(linkId);
             return ret != 0;
         }
-        public static bool IsNodeSelected(axNodeEditor_NodeId nodeId)
+        public static bool IsNodeSelected(NodeId nodeId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_IsNodeSelected(nodeId);
             return ret != 0;
@@ -448,7 +442,7 @@ namespace AxNodeEditorNET
             byte ret = AxNodeEditorNative.axNodeEditor_IsSuspended();
             return ret != 0;
         }
-        public static bool Link(axNodeEditor_LinkId id, axNodeEditor_PinId startPinId, axNodeEditor_PinId endPinId, ref Vector4 color, float thickness)
+        public static bool Link(LinkId id, PinId startPinId, PinId endPinId, ref Vector4 color, float thickness)
         {
             fixed (Vector4* native_color = &color)
             {
@@ -465,17 +459,7 @@ namespace AxNodeEditorNET
             byte native_zoomIn = zoomIn ? (byte)1 : (byte)0;
             AxNodeEditorNative.axNodeEditor_NavigateToSelection(native_zoomIn, duration);
         }
-        public static axNodeEditor_SaveReasonFlags operator&(axNodeEditor_SaveReasonFlags lhs, axNodeEditor_SaveReasonFlags rhs)
-        {
-            axNodeEditor_SaveReasonFlags ret = AxNodeEditorNative.axNodeEditor_operator_amp(lhs, rhs);
-            return ret;
-        }
-        public static axNodeEditor_SaveReasonFlags operator|(axNodeEditor_SaveReasonFlags lhs, axNodeEditor_SaveReasonFlags rhs)
-        {
-            axNodeEditor_SaveReasonFlags ret = AxNodeEditorNative.axNodeEditor_operator_pipe(lhs, rhs);
-            return ret;
-        }
-        public static bool PinHadAnyLinks(axNodeEditor_PinId pinId)
+        public static bool PinHadAnyLinks(PinId pinId)
         {
             byte ret = AxNodeEditorNative.axNodeEditor_PinHadAnyLinks(pinId);
             return ret != 0;
@@ -529,38 +513,38 @@ namespace AxNodeEditorNET
         {
             AxNodeEditorNative.axNodeEditor_PopStyleVar(count);
         }
-        public static void PushStyleColor(axNodeEditor_StyleColor colorIndex, ref Vector4 color)
+        public static void PushStyleColor(StyleColor colorIndex, ref Vector4 color)
         {
             fixed (Vector4* native_color = &color)
             {
                 AxNodeEditorNative.axNodeEditor_PushStyleColor(colorIndex, native_color);
             }
         }
-        public static void PushStyleVar(axNodeEditor_StyleVar varIndex, float value)
+        public static void PushStyleVar(StyleVar varIndex, float value)
         {
             AxNodeEditorNative.axNodeEditor_PushStyleVar(varIndex, value);
         }
-        public static void PushStyleVar(axNodeEditor_StyleVar varIndex, ref Vector2 value)
+        public static void PushStyleVar(StyleVar varIndex, ref Vector2 value)
         {
             fixed (Vector2* native_value = &value)
             {
-                AxNodeEditorNative.axNodeEditor_PushStyleVar(varIndex, native_value);
+                AxNodeEditorNative.axNodeEditor_PushStyleVar1(varIndex, native_value);
             }
         }
-        public static void PushStyleVar(axNodeEditor_StyleVar varIndex, ref Vector4 value)
+        public static void PushStyleVar(StyleVar varIndex, ref Vector4 value)
         {
             fixed (Vector4* native_value = &value)
             {
-                AxNodeEditorNative.axNodeEditor_PushStyleVar(varIndex, native_value);
+                AxNodeEditorNative.axNodeEditor_PushStyleVar2(varIndex, native_value);
             }
         }
-        public static bool QueryDeletedLink(ref axNodeEditor_LinkId linkId, ref axNodeEditor_PinId startId, ref axNodeEditor_PinId endId)
+        public static bool QueryDeletedLink(ref LinkId linkId, ref PinId startId, ref PinId endId)
         {
-            fixed (axNodeEditor_LinkId* native_linkId = &linkId)
+            fixed (LinkId* native_linkId = &linkId)
             {
-                fixed (axNodeEditor_PinId* native_startId = &startId)
+                fixed (PinId* native_startId = &startId)
                 {
-                    fixed (axNodeEditor_PinId* native_endId = &endId)
+                    fixed (PinId* native_endId = &endId)
                     {
                         byte ret = AxNodeEditorNative.axNodeEditor_QueryDeletedLink(native_linkId, native_startId, native_endId);
                         return ret != 0;
@@ -568,54 +552,54 @@ namespace AxNodeEditorNET
                 }
             }
         }
-        public static bool QueryDeletedNode(ref axNodeEditor_NodeId nodeId)
+        public static bool QueryDeletedNode(ref NodeId nodeId)
         {
-            fixed (axNodeEditor_NodeId* native_nodeId = &nodeId)
+            fixed (NodeId* native_nodeId = &nodeId)
             {
                 byte ret = AxNodeEditorNative.axNodeEditor_QueryDeletedNode(native_nodeId);
                 return ret != 0;
             }
         }
-        public static bool QueryNewLink(ref axNodeEditor_PinId startId, ref axNodeEditor_PinId endId)
+        public static bool QueryNewLink(ref PinId startId, ref PinId endId)
         {
-            fixed (axNodeEditor_PinId* native_startId = &startId)
+            fixed (PinId* native_startId = &startId)
             {
-                fixed (axNodeEditor_PinId* native_endId = &endId)
+                fixed (PinId* native_endId = &endId)
                 {
                     byte ret = AxNodeEditorNative.axNodeEditor_QueryNewLink(native_startId, native_endId);
                     return ret != 0;
                 }
             }
         }
-        public static bool QueryNewLink(ref axNodeEditor_PinId startId, ref axNodeEditor_PinId endId, ref Vector4 color, float thickness)
+        public static bool QueryNewLink(ref PinId startId, ref PinId endId, ref Vector4 color, float thickness)
         {
-            fixed (axNodeEditor_PinId* native_startId = &startId)
+            fixed (PinId* native_startId = &startId)
             {
-                fixed (axNodeEditor_PinId* native_endId = &endId)
+                fixed (PinId* native_endId = &endId)
                 {
                     fixed (Vector4* native_color = &color)
                     {
-                        byte ret = AxNodeEditorNative.axNodeEditor_QueryNewLink(native_startId, native_endId, native_color, thickness);
+                        byte ret = AxNodeEditorNative.axNodeEditor_QueryNewLink1(native_startId, native_endId, native_color, thickness);
                         return ret != 0;
                     }
                 }
             }
         }
-        public static bool QueryNewNode(ref axNodeEditor_PinId pinId)
+        public static bool QueryNewNode(ref PinId pinId)
         {
-            fixed (axNodeEditor_PinId* native_pinId = &pinId)
+            fixed (PinId* native_pinId = &pinId)
             {
                 byte ret = AxNodeEditorNative.axNodeEditor_QueryNewNode(native_pinId);
                 return ret != 0;
             }
         }
-        public static bool QueryNewNode(ref axNodeEditor_PinId pinId, ref Vector4 color, float thickness)
+        public static bool QueryNewNode(ref PinId pinId, ref Vector4 color, float thickness)
         {
-            fixed (axNodeEditor_PinId* native_pinId = &pinId)
+            fixed (PinId* native_pinId = &pinId)
             {
                 fixed (Vector4* native_color = &color)
                 {
-                    byte ret = AxNodeEditorNative.axNodeEditor_QueryNewNode(native_pinId, native_color, thickness);
+                    byte ret = AxNodeEditorNative.axNodeEditor_QueryNewNode1(native_pinId, native_color, thickness);
                     return ret != 0;
                 }
             }
@@ -632,10 +616,10 @@ namespace AxNodeEditorNET
         {
             fixed (Vector4* native_color = &color)
             {
-                AxNodeEditorNative.axNodeEditor_RejectNewItem(native_color, thickness);
+                AxNodeEditorNative.axNodeEditor_RejectNewItem1(native_color, thickness);
             }
         }
-        public static void RestoreNodeState(axNodeEditor_NodeId nodeId)
+        public static void RestoreNodeState(NodeId nodeId)
         {
             AxNodeEditorNative.axNodeEditor_RestoreNodeState(nodeId);
         }
@@ -651,38 +635,35 @@ namespace AxNodeEditorNET
                 return ret;
             }
         }
-        public static void SelectLink(axNodeEditor_LinkId linkId, bool append)
+        public static void SelectLink(LinkId linkId, bool append)
         {
             byte native_append = append ? (byte)1 : (byte)0;
             AxNodeEditorNative.axNodeEditor_SelectLink(linkId, native_append);
         }
-        public static void SelectNode(axNodeEditor_NodeId nodeId, bool append)
+        public static void SelectNode(NodeId nodeId, bool append)
         {
             byte native_append = append ? (byte)1 : (byte)0;
             AxNodeEditorNative.axNodeEditor_SelectNode(nodeId, native_append);
         }
-        public static void SetCurrentEditor(ref axNodeEditor_EditorContext ctx)
+        public static void SetCurrentEditor(IntPtr ctx)
         {
-            fixed (axNodeEditor_EditorContext* native_ctx = &ctx)
-            {
-                AxNodeEditorNative.axNodeEditor_SetCurrentEditor(native_ctx);
-            }
+            AxNodeEditorNative.axNodeEditor_SetCurrentEditor(ctx);
         }
-        public static void SetGroupSize(axNodeEditor_NodeId nodeId, ref Vector2 size)
+        public static void SetGroupSize(NodeId nodeId, ref Vector2 size)
         {
             fixed (Vector2* native_size = &size)
             {
                 AxNodeEditorNative.axNodeEditor_SetGroupSize(nodeId, native_size);
             }
         }
-        public static void SetNodePosition(axNodeEditor_NodeId nodeId, ref Vector2 editorPosition)
+        public static void SetNodePosition(NodeId nodeId, ref Vector2 editorPosition)
         {
             fixed (Vector2* native_editorPosition = &editorPosition)
             {
                 AxNodeEditorNative.axNodeEditor_SetNodePosition(nodeId, native_editorPosition);
             }
         }
-        public static void SetNodeZPosition(axNodeEditor_NodeId nodeId, float z)
+        public static void SetNodeZPosition(NodeId nodeId, float z)
         {
             AxNodeEditorNative.axNodeEditor_SetNodeZPosition(nodeId, z);
         }
@@ -691,25 +672,25 @@ namespace AxNodeEditorNET
             byte ret = AxNodeEditorNative.axNodeEditor_ShowBackgroundContextMenu();
             return ret != 0;
         }
-        public static bool ShowLinkContextMenu(ref axNodeEditor_LinkId linkId)
+        public static bool ShowLinkContextMenu(ref LinkId linkId)
         {
-            fixed (axNodeEditor_LinkId* native_linkId = &linkId)
+            fixed (LinkId* native_linkId = &linkId)
             {
                 byte ret = AxNodeEditorNative.axNodeEditor_ShowLinkContextMenu(native_linkId);
                 return ret != 0;
             }
         }
-        public static bool ShowNodeContextMenu(ref axNodeEditor_NodeId nodeId)
+        public static bool ShowNodeContextMenu(ref NodeId nodeId)
         {
-            fixed (axNodeEditor_NodeId* native_nodeId = &nodeId)
+            fixed (NodeId* native_nodeId = &nodeId)
             {
                 byte ret = AxNodeEditorNative.axNodeEditor_ShowNodeContextMenu(native_nodeId);
                 return ret != 0;
             }
         }
-        public static bool ShowPinContextMenu(ref axNodeEditor_PinId pinId)
+        public static bool ShowPinContextMenu(ref PinId pinId)
         {
-            fixed (axNodeEditor_PinId* native_pinId = &pinId)
+            fixed (PinId* native_pinId = &pinId)
             {
                 byte ret = AxNodeEditorNative.axNodeEditor_ShowPinContextMenu(native_pinId);
                 return ret != 0;
@@ -718,129 +699,6 @@ namespace AxNodeEditorNET
         public static void Suspend()
         {
             AxNodeEditorNative.axNodeEditor_Suspend();
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId_operator_equal1(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId_operator_equal1(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_PinId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_PinId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_PinId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* operator=(ref axNodeEditorDetails_SafePointerType_axNodeEditor_PinId __self, ref axNodeEditorDetails_SafePointerType_axNodeEditor_PinId __0)
-        {
-            fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* ret = AxNodeEditorNative.axNodeEditorDetails_SafePointerType_axNodeEditor_PinId_operator_equal1(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static unsigned long long Get(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId __self)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* native___self = &__self)
-            {
-                unsigned long long ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId_Get(native___self);
-                return ret;
-            }
-        }
-        public static axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* operator=(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId __self, ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId __0)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static unsigned long long Get(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId __self)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* native___self = &__self)
-            {
-                unsigned long long ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId_Get(native___self);
-                return ret;
-            }
-        }
-        public static axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* operator=(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId __self, ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId __0)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
-        }
-        public static unsigned long long Get(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId __self)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* native___self = &__self)
-            {
-                unsigned long long ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId_Get(native___self);
-                return ret;
-            }
-        }
-        public static axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* operator=(ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId __self, ref axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId __0)
-        {
-            fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* native___self = &__self)
-            {
-                fixed (axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* native___0 = &__0)
-                {
-                    axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* ret = AxNodeEditorNative.axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId_operator_equal(native___self, native___0);
-                    return ret;
-                }
-            }
         }
     }
 }

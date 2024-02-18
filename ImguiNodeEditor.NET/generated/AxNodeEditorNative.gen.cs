@@ -20,7 +20,7 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_AcceptNewItem();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_AcceptNewItem(Vector4* color, float thickness);
+        public static extern byte axNodeEditor_AcceptNewItem1(Vector4* color, float thickness);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_AcceptPaste();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -32,35 +32,41 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_BeginDelete();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_BeginGroupHint(axNodeEditor_NodeId nodeId);
+        public static extern byte axNodeEditor_BeginGroupHint(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_BeginNode(axNodeEditor_NodeId id);
+        public static extern void axNodeEditor_BeginNode(NodeId id);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_BeginPin(axNodeEditor_PinId id, axNodeEditor_PinKind kind);
+        public static extern void axNodeEditor_BeginPin(PinId id, PinKind kind);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_BeginShortcut();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_BreakLinks(axNodeEditor_NodeId nodeId);
+        public static extern int axNodeEditor_BreakLinks(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_BreakLinks(axNodeEditor_PinId pinId);
+        public static extern int axNodeEditor_BreakLinks1(PinId pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern Vector2 axNodeEditor_CanvasToScreen(Vector2* pos);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_CenterNodeOnScreen(axNodeEditor_NodeId nodeId);
+        public static extern void axNodeEditor_CenterNodeOnScreen(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_ClearSelection();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_EditorContext* axNodeEditor_CreateEditor(axNodeEditor_Config* config);
+        public static extern IntPtr axNodeEditor_CreateEditor(Config* config);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_DeleteLink(axNodeEditor_LinkId linkId);
+        public static extern byte axNodeEditor_DeleteLink(LinkId linkId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_DeleteNode(axNodeEditor_NodeId nodeId);
+        public static extern byte axNodeEditor_DeleteNode(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_DeselectLink(axNodeEditor_LinkId linkId);
+        public static extern void axNodeEditor_DeselectLink(LinkId linkId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_DeselectNode(axNodeEditor_NodeId nodeId);
+        public static extern void axNodeEditor_DeselectNode(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_DestroyEditor(axNodeEditor_EditorContext* ctx);
+        public static extern void axNodeEditor_DestroyEditor(IntPtr ctx);
+        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void* axNodeEditorDetails_SafeType_voidptr_axNodeEditor_LinkId_Get(Details_SafeType_voidptr_LinkId* __self);
+        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void* axNodeEditorDetails_SafeType_voidptr_axNodeEditor_NodeId_Get(Details_SafeType_voidptr_NodeId* __self);
+        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void* axNodeEditorDetails_SafeType_voidptr_axNodeEditor_PinId_Get(Details_SafeType_voidptr_PinId* __self);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_EnableShortcuts(byte enable);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -78,11 +84,11 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_EndShortcut();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_Flow(axNodeEditor_LinkId linkId, axNodeEditor_FlowDirection direction);
+        public static extern void axNodeEditor_Flow(LinkId linkId, FlowDirection direction);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_GetActionContextLinks(axNodeEditor_LinkId* links, int size);
+        public static extern int axNodeEditor_GetActionContextLinks(LinkId* links, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_GetActionContextNodes(axNodeEditor_NodeId* nodes, int size);
+        public static extern int axNodeEditor_GetActionContextNodes(NodeId* nodes, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetActionContextSize();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -90,17 +96,17 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetBackgroundDoubleClickButtonIndex();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_Config* axNodeEditor_GetConfig(axNodeEditor_EditorContext* ctx);
+        public static extern Config* axNodeEditor_GetConfig(IntPtr ctx);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_EditorContext* axNodeEditor_GetCurrentEditor();
+        public static extern IntPtr axNodeEditor_GetCurrentEditor();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern float axNodeEditor_GetCurrentZoom();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_LinkId axNodeEditor_GetDoubleClickedLink();
+        public static extern LinkId axNodeEditor_GetDoubleClickedLink();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_NodeId axNodeEditor_GetDoubleClickedNode();
+        public static extern NodeId axNodeEditor_GetDoubleClickedNode();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_PinId axNodeEditor_GetDoubleClickedPin();
+        public static extern PinId axNodeEditor_GetDoubleClickedPin();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern Vector2 axNodeEditor_GetGroupMax();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -110,43 +116,43 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern ImDrawList* axNodeEditor_GetHintForegroundDrawList();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_LinkId axNodeEditor_GetHoveredLink();
+        public static extern LinkId axNodeEditor_GetHoveredLink();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_NodeId axNodeEditor_GetHoveredNode();
+        public static extern NodeId axNodeEditor_GetHoveredNode();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_PinId axNodeEditor_GetHoveredPin();
+        public static extern PinId axNodeEditor_GetHoveredPin();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_GetLinkPins(axNodeEditor_LinkId linkId, axNodeEditor_PinId* startPinId, axNodeEditor_PinId* endPinId);
+        public static extern byte axNodeEditor_GetLinkPins(LinkId linkId, PinId* startPinId, PinId* endPinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ImDrawList* axNodeEditor_GetNodeBackgroundDrawList(axNodeEditor_NodeId nodeId);
+        public static extern ImDrawList* axNodeEditor_GetNodeBackgroundDrawList(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetNodeCount();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetNodePosition(axNodeEditor_NodeId nodeId);
+        public static extern Vector2 axNodeEditor_GetNodePosition(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetNodeSize(axNodeEditor_NodeId nodeId);
+        public static extern Vector2 axNodeEditor_GetNodeSize(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern float axNodeEditor_GetNodeZPosition(axNodeEditor_NodeId nodeId);
+        public static extern float axNodeEditor_GetNodeZPosition(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_GetOrderedNodeIds(axNodeEditor_NodeId* nodes, int size);
+        public static extern int axNodeEditor_GetOrderedNodeIds(NodeId* nodes, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern Vector2 axNodeEditor_GetScreenSize();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_GetSelectedLinks(axNodeEditor_LinkId* links, int size);
+        public static extern int axNodeEditor_GetSelectedLinks(LinkId* links, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int axNodeEditor_GetSelectedNodes(axNodeEditor_NodeId* nodes, int size);
+        public static extern int axNodeEditor_GetSelectedNodes(NodeId* nodes, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetSelectedObjectCount();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_Style* axNodeEditor_GetStyle();
+        public static extern Style* axNodeEditor_GetStyle();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* axNodeEditor_GetStyleColorName(axNodeEditor_StyleColor colorIndex);
+        public static extern byte* axNodeEditor_GetStyleColorName(StyleColor colorIndex);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_Group(Vector2* size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_HasAnyLinks(axNodeEditor_NodeId nodeId);
+        public static extern byte axNodeEditor_HasAnyLinks(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_HasAnyLinks(axNodeEditor_PinId pinId);
+        public static extern byte axNodeEditor_HasAnyLinks1(PinId pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_HasSelectionChanged();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -156,23 +162,19 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_IsBackgroundDoubleClicked();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_IsLinkSelected(axNodeEditor_LinkId linkId);
+        public static extern byte axNodeEditor_IsLinkSelected(LinkId linkId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_IsNodeSelected(axNodeEditor_NodeId nodeId);
+        public static extern byte axNodeEditor_IsNodeSelected(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_IsSuspended();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_Link(axNodeEditor_LinkId id, axNodeEditor_PinId startPinId, axNodeEditor_PinId endPinId, Vector4* color, float thickness);
+        public static extern byte axNodeEditor_Link(LinkId id, PinId startPinId, PinId endPinId, Vector4* color, float thickness);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_NavigateToContent(float duration);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_NavigateToSelection(byte zoomIn, float duration);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_SaveReasonFlags axNodeEditor_operator_amp(axNodeEditor_SaveReasonFlags lhs, axNodeEditor_SaveReasonFlags rhs);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditor_SaveReasonFlags axNodeEditor_operator_pipe(axNodeEditor_SaveReasonFlags lhs, axNodeEditor_SaveReasonFlags rhs);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_PinHadAnyLinks(axNodeEditor_PinId pinId);
+        public static extern byte axNodeEditor_PinHadAnyLinks(PinId pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_PinPivotAlignment(Vector2* alignment);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -188,82 +190,58 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_PopStyleVar(int count);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_PushStyleColor(axNodeEditor_StyleColor colorIndex, Vector4* color);
+        public static extern void axNodeEditor_PushStyleColor(StyleColor colorIndex, Vector4* color);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_PushStyleVar(axNodeEditor_StyleVar varIndex, float value);
+        public static extern void axNodeEditor_PushStyleVar(StyleVar varIndex, float value);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_PushStyleVar(axNodeEditor_StyleVar varIndex, Vector2* value);
+        public static extern void axNodeEditor_PushStyleVar1(StyleVar varIndex, Vector2* value);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_PushStyleVar(axNodeEditor_StyleVar varIndex, Vector4* value);
+        public static extern void axNodeEditor_PushStyleVar2(StyleVar varIndex, Vector4* value);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryDeletedLink(axNodeEditor_LinkId* linkId, axNodeEditor_PinId* startId, axNodeEditor_PinId* endId);
+        public static extern byte axNodeEditor_QueryDeletedLink(LinkId* linkId, PinId* startId, PinId* endId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryDeletedNode(axNodeEditor_NodeId* nodeId);
+        public static extern byte axNodeEditor_QueryDeletedNode(NodeId* nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryNewLink(axNodeEditor_PinId* startId, axNodeEditor_PinId* endId);
+        public static extern byte axNodeEditor_QueryNewLink(PinId* startId, PinId* endId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryNewLink(axNodeEditor_PinId* startId, axNodeEditor_PinId* endId, Vector4* color, float thickness);
+        public static extern byte axNodeEditor_QueryNewLink1(PinId* startId, PinId* endId, Vector4* color, float thickness);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryNewNode(axNodeEditor_PinId* pinId);
+        public static extern byte axNodeEditor_QueryNewNode(PinId* pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_QueryNewNode(axNodeEditor_PinId* pinId, Vector4* color, float thickness);
+        public static extern byte axNodeEditor_QueryNewNode1(PinId* pinId, Vector4* color, float thickness);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_RejectDeletedItem();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_RejectNewItem();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_RejectNewItem(Vector4* color, float thickness);
+        public static extern void axNodeEditor_RejectNewItem1(Vector4* color, float thickness);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_RestoreNodeState(axNodeEditor_NodeId nodeId);
+        public static extern void axNodeEditor_RestoreNodeState(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_Resume();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern Vector2 axNodeEditor_ScreenToCanvas(Vector2* pos);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SelectLink(axNodeEditor_LinkId linkId, byte append);
+        public static extern void axNodeEditor_SelectLink(LinkId linkId, byte append);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SelectNode(axNodeEditor_NodeId nodeId, byte append);
+        public static extern void axNodeEditor_SelectNode(NodeId nodeId, byte append);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SetCurrentEditor(axNodeEditor_EditorContext* ctx);
+        public static extern void axNodeEditor_SetCurrentEditor(IntPtr ctx);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SetGroupSize(axNodeEditor_NodeId nodeId, Vector2* size);
+        public static extern void axNodeEditor_SetGroupSize(NodeId nodeId, Vector2* size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SetNodePosition(axNodeEditor_NodeId nodeId, Vector2* editorPosition);
+        public static extern void axNodeEditor_SetNodePosition(NodeId nodeId, Vector2* editorPosition);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void axNodeEditor_SetNodeZPosition(axNodeEditor_NodeId nodeId, float z);
+        public static extern void axNodeEditor_SetNodeZPosition(NodeId nodeId, float z);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_ShowBackgroundContextMenu();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_ShowLinkContextMenu(axNodeEditor_LinkId* linkId);
+        public static extern byte axNodeEditor_ShowLinkContextMenu(LinkId* linkId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_ShowNodeContextMenu(axNodeEditor_NodeId* nodeId);
+        public static extern byte axNodeEditor_ShowNodeContextMenu(NodeId* nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte axNodeEditor_ShowPinContextMenu(axNodeEditor_PinId* pinId);
+        public static extern byte axNodeEditor_ShowPinContextMenu(PinId* pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_Suspend();
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId_operator_equal(axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId_operator_equal1(axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_LinkId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId_operator_equal(axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId_operator_equal1(axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_NodeId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* axNodeEditorDetails_SafePointerType_axNodeEditor_PinId_operator_equal(axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* axNodeEditorDetails_SafePointerType_axNodeEditor_PinId_operator_equal1(axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* __self, axNodeEditorDetails_SafePointerType_axNodeEditor_PinId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsigned long long axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId_Get(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* __self);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId_operator_equal(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* __self, axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_LinkId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsigned long long axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId_Get(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* __self);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId_operator_equal(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* __self, axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_NodeId* __0);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern unsigned long long axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId_Get(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* __self);
-        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId_operator_equal(axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* __self, axNodeEditorDetails_SafeType_unsignedlonglong_axNodeEditor_PinId* __0);
     }
 }

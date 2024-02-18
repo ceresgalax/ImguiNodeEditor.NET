@@ -6,7 +6,7 @@ using ImGuiNET;
 
 namespace AxNodeEditorNET
 {
-    public unsafe partial struct axNodeEditor_Config
+    public unsafe partial struct Config
     {
         public byte* SettingsFile;
         public IntPtr BeginSaveSession;
@@ -17,7 +17,7 @@ namespace AxNodeEditorNET
         public IntPtr LoadNodeSettings;
         public void* UserPointer;
         public ImVector CustomZoomLevels;
-        public axNodeEditor_CanvasSizeMode CanvasSizeMode;
+        public CanvasSizeMode CanvasSizeMode;
         public int DragButtonIndex;
         public int SelectButtonIndex;
         public int NavigateButtonIndex;
@@ -25,14 +25,14 @@ namespace AxNodeEditorNET
         public byte EnableSmoothZoom;
         public float SmoothZoomPower;
     }
-    public unsafe partial struct axNodeEditor_ConfigPtr
+    public unsafe partial struct ConfigPtr
     {
-        public axNodeEditor_Config* NativePtr { get; }
-        public axNodeEditor_ConfigPtr(axNodeEditor_Config* nativePtr) => NativePtr = nativePtr;
-        public axNodeEditor_ConfigPtr(IntPtr nativePtr) => NativePtr = (axNodeEditor_Config*)nativePtr;
-        public static implicit operator axNodeEditor_ConfigPtr(axNodeEditor_Config* nativePtr) => new axNodeEditor_ConfigPtr(nativePtr);
-        public static implicit operator axNodeEditor_Config* (axNodeEditor_ConfigPtr wrappedPtr) => wrappedPtr.NativePtr;
-        public static implicit operator axNodeEditor_ConfigPtr(IntPtr nativePtr) => new axNodeEditor_ConfigPtr(nativePtr);
+        public Config* NativePtr { get; }
+        public ConfigPtr(Config* nativePtr) => NativePtr = nativePtr;
+        public ConfigPtr(IntPtr nativePtr) => NativePtr = (Config*)nativePtr;
+        public static implicit operator ConfigPtr(Config* nativePtr) => new ConfigPtr(nativePtr);
+        public static implicit operator Config* (ConfigPtr wrappedPtr) => wrappedPtr.NativePtr;
+        public static implicit operator ConfigPtr(IntPtr nativePtr) => new ConfigPtr(nativePtr);
         public IntPtr SettingsFile { get => (IntPtr)NativePtr->SettingsFile; set => NativePtr->SettingsFile = (byte*)value; }
         public ref IntPtr BeginSaveSession => ref Unsafe.AsRef<IntPtr>(&NativePtr->BeginSaveSession);
         public ref IntPtr EndSaveSession => ref Unsafe.AsRef<IntPtr>(&NativePtr->EndSaveSession);
@@ -41,8 +41,8 @@ namespace AxNodeEditorNET
         public ref IntPtr SaveNodeSettings => ref Unsafe.AsRef<IntPtr>(&NativePtr->SaveNodeSettings);
         public ref IntPtr LoadNodeSettings => ref Unsafe.AsRef<IntPtr>(&NativePtr->LoadNodeSettings);
         public IntPtr UserPointer { get => (IntPtr)NativePtr->UserPointer; set => NativePtr->UserPointer = (void*)value; }
-        public ImVector<> CustomZoomLevels => new ImVector<>(NativePtr->CustomZoomLevels);
-        public ref axNodeEditor_CanvasSizeMode CanvasSizeMode => ref Unsafe.AsRef<axNodeEditor_CanvasSizeMode>(&NativePtr->CanvasSizeMode);
+        public ImVector<float> CustomZoomLevels => new ImVector<float>(NativePtr->CustomZoomLevels);
+        public ref CanvasSizeMode CanvasSizeMode => ref Unsafe.AsRef<CanvasSizeMode>(&NativePtr->CanvasSizeMode);
         public ref int DragButtonIndex => ref Unsafe.AsRef<int>(&NativePtr->DragButtonIndex);
         public ref int SelectButtonIndex => ref Unsafe.AsRef<int>(&NativePtr->SelectButtonIndex);
         public ref int NavigateButtonIndex => ref Unsafe.AsRef<int>(&NativePtr->NavigateButtonIndex);

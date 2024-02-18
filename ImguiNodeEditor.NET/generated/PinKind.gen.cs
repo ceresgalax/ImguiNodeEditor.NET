@@ -1,6 +1,6 @@
 namespace AxNodeEditorNET
 {
-    public enum axNodeEditor_PinKind
+    public enum PinKind
     {
         Input = 0,
         Output = 1,

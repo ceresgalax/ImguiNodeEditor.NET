@@ -1,6 +1,6 @@
 namespace AxNodeEditorNET
 {
-    public enum axNodeEditor_CanvasSizeMode
+    public enum CanvasSizeMode
     {
         FitVerticalView = 0,
         FitHorizontalView = 1,
