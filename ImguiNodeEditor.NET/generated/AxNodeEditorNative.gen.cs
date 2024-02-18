@@ -68,6 +68,8 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void* axNodeEditorDetails_SafeType_voidptr_axNodeEditor_PinId_Get(Details_SafeType_voidptr_PinId* __self);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void axDrawing_DrawIcon(ImDrawList* drawList, Vector2* a, Vector2* b, Drawing_IconType type, byte filled, uint color, uint innerColor);
+        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_EnableShortcuts(byte enable);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_End();
@@ -243,5 +245,7 @@ namespace AxNodeEditorNET
         public static extern byte axNodeEditor_ShowPinContextMenu(PinId* pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_Suspend();
+        [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void axWidgets_Icon(Vector2* size, Drawing_IconType type, byte filled, Vector4* color, Vector4* innerColor);
     }
 }

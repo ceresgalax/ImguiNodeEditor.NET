@@ -177,6 +177,18 @@ namespace AxNodeEditorNET
         {
             AxNodeEditorNative.axNodeEditor_DestroyEditor(ctx);
         }
+        public static void DrawIcon(ImDrawListPtr drawList, ref Vector2 a, ref Vector2 b, Drawing_IconType type, bool filled, uint color, uint innerColor)
+        {
+            ImDrawList* native_drawList = drawList.NativePtr;
+            byte native_filled = filled ? (byte)1 : (byte)0;
+            fixed (Vector2* native_a = &a)
+            {
+                fixed (Vector2* native_b = &b)
+                {
+                    AxNodeEditorNative.axDrawing_DrawIcon(native_drawList, native_a, native_b, type, native_filled, color, innerColor);
+                }
+            }
+        }
         public static void EnableShortcuts(bool enable)
         {
             byte native_enable = enable ? (byte)1 : (byte)0;
@@ -699,6 +711,20 @@ namespace AxNodeEditorNET
         public static void Suspend()
         {
             AxNodeEditorNative.axNodeEditor_Suspend();
+        }
+        public static void Icon(ref Vector2 size, Drawing_IconType type, bool filled, ref Vector4 color, ref Vector4 innerColor)
+        {
+            byte native_filled = filled ? (byte)1 : (byte)0;
+            fixed (Vector2* native_size = &size)
+            {
+                fixed (Vector4* native_color = &color)
+                {
+                    fixed (Vector4* native_innerColor = &innerColor)
+                    {
+                        AxNodeEditorNative.axWidgets_Icon(native_size, type, native_filled, native_color, native_innerColor);
+                    }
+                }
+            }
         }
     }
 }
