@@ -133,10 +133,11 @@ namespace AxNodeEditorNET
         }
         public static Vector2 CanvasToScreen(ref Vector2 pos)
         {
+            Vector2 __retval;
             fixed (Vector2* native_pos = &pos)
             {
-                Vector2 ret = AxNodeEditorNative.axNodeEditor_CanvasToScreen(native_pos);
-                return ret;
+                AxNodeEditorNative.axNodeEditor_CanvasToScreen(native_pos, &__retval);
+                return __retval;
             }
         }
         public static void CenterNodeOnScreen(NodeId nodeId)
@@ -274,28 +275,33 @@ namespace AxNodeEditorNET
         }
         public static LinkId GetDoubleClickedLink()
         {
-            LinkId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedLink();
-            return ret;
+            LinkId __retval;
+            AxNodeEditorNative.axNodeEditor_GetDoubleClickedLink(&__retval);
+            return __retval;
         }
         public static NodeId GetDoubleClickedNode()
         {
-            NodeId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedNode();
-            return ret;
+            NodeId __retval;
+            AxNodeEditorNative.axNodeEditor_GetDoubleClickedNode(&__retval);
+            return __retval;
         }
         public static PinId GetDoubleClickedPin()
         {
-            PinId ret = AxNodeEditorNative.axNodeEditor_GetDoubleClickedPin();
-            return ret;
+            PinId __retval;
+            AxNodeEditorNative.axNodeEditor_GetDoubleClickedPin(&__retval);
+            return __retval;
         }
         public static Vector2 GetGroupMax()
         {
-            Vector2 ret = AxNodeEditorNative.axNodeEditor_GetGroupMax();
-            return ret;
+            Vector2 __retval;
+            AxNodeEditorNative.axNodeEditor_GetGroupMax(&__retval);
+            return __retval;
         }
         public static Vector2 GetGroupMin()
         {
-            Vector2 ret = AxNodeEditorNative.axNodeEditor_GetGroupMin();
-            return ret;
+            Vector2 __retval;
+            AxNodeEditorNative.axNodeEditor_GetGroupMin(&__retval);
+            return __retval;
         }
         public static ImDrawListPtr GetHintBackgroundDrawList()
         {
@@ -309,18 +315,21 @@ namespace AxNodeEditorNET
         }
         public static LinkId GetHoveredLink()
         {
-            LinkId ret = AxNodeEditorNative.axNodeEditor_GetHoveredLink();
-            return ret;
+            LinkId __retval;
+            AxNodeEditorNative.axNodeEditor_GetHoveredLink(&__retval);
+            return __retval;
         }
         public static NodeId GetHoveredNode()
         {
-            NodeId ret = AxNodeEditorNative.axNodeEditor_GetHoveredNode();
-            return ret;
+            NodeId __retval;
+            AxNodeEditorNative.axNodeEditor_GetHoveredNode(&__retval);
+            return __retval;
         }
         public static PinId GetHoveredPin()
         {
-            PinId ret = AxNodeEditorNative.axNodeEditor_GetHoveredPin();
-            return ret;
+            PinId __retval;
+            AxNodeEditorNative.axNodeEditor_GetHoveredPin(&__retval);
+            return __retval;
         }
         public static bool GetLinkPins(LinkId linkId, ref PinId startPinId, ref PinId endPinId)
         {
@@ -345,13 +354,15 @@ namespace AxNodeEditorNET
         }
         public static Vector2 GetNodePosition(NodeId nodeId)
         {
-            Vector2 ret = AxNodeEditorNative.axNodeEditor_GetNodePosition(nodeId);
-            return ret;
+            Vector2 __retval;
+            AxNodeEditorNative.axNodeEditor_GetNodePosition(nodeId, &__retval);
+            return __retval;
         }
         public static Vector2 GetNodeSize(NodeId nodeId)
         {
-            Vector2 ret = AxNodeEditorNative.axNodeEditor_GetNodeSize(nodeId);
-            return ret;
+            Vector2 __retval;
+            AxNodeEditorNative.axNodeEditor_GetNodeSize(nodeId, &__retval);
+            return __retval;
         }
         public static float GetNodeZPosition(NodeId nodeId)
         {
@@ -368,8 +379,9 @@ namespace AxNodeEditorNET
         }
         public static Vector2 GetScreenSize()
         {
-            Vector2 ret = AxNodeEditorNative.axNodeEditor_GetScreenSize();
-            return ret;
+            Vector2 __retval;
+            AxNodeEditorNative.axNodeEditor_GetScreenSize(&__retval);
+            return __retval;
         }
         public static int GetSelectedLinks(ref LinkId links, int size)
         {
@@ -641,10 +653,11 @@ namespace AxNodeEditorNET
         }
         public static Vector2 ScreenToCanvas(ref Vector2 pos)
         {
+            Vector2 __retval;
             fixed (Vector2* native_pos = &pos)
             {
-                Vector2 ret = AxNodeEditorNative.axNodeEditor_ScreenToCanvas(native_pos);
-                return ret;
+                AxNodeEditorNative.axNodeEditor_ScreenToCanvas(native_pos, &__retval);
+                return __retval;
             }
         }
         public static void SelectLink(LinkId linkId, bool append)

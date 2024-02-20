@@ -44,7 +44,7 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_BreakLinks1(PinId pinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_CanvasToScreen(Vector2* pos);
+        public static extern void axNodeEditor_CanvasToScreen(Vector2* pos, Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_CenterNodeOnScreen(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -104,25 +104,25 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern float axNodeEditor_GetCurrentZoom();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern LinkId axNodeEditor_GetDoubleClickedLink();
+        public static extern void axNodeEditor_GetDoubleClickedLink(LinkId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern NodeId axNodeEditor_GetDoubleClickedNode();
+        public static extern void axNodeEditor_GetDoubleClickedNode(NodeId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern PinId axNodeEditor_GetDoubleClickedPin();
+        public static extern void axNodeEditor_GetDoubleClickedPin(PinId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetGroupMax();
+        public static extern void axNodeEditor_GetGroupMax(Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetGroupMin();
+        public static extern void axNodeEditor_GetGroupMin(Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern ImDrawList* axNodeEditor_GetHintBackgroundDrawList();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern ImDrawList* axNodeEditor_GetHintForegroundDrawList();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern LinkId axNodeEditor_GetHoveredLink();
+        public static extern void axNodeEditor_GetHoveredLink(LinkId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern NodeId axNodeEditor_GetHoveredNode();
+        public static extern void axNodeEditor_GetHoveredNode(NodeId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern PinId axNodeEditor_GetHoveredPin();
+        public static extern void axNodeEditor_GetHoveredPin(PinId* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern byte axNodeEditor_GetLinkPins(LinkId linkId, PinId* startPinId, PinId* endPinId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -130,15 +130,15 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetNodeCount();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetNodePosition(NodeId nodeId);
+        public static extern void axNodeEditor_GetNodePosition(NodeId nodeId, Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetNodeSize(NodeId nodeId);
+        public static extern void axNodeEditor_GetNodeSize(NodeId nodeId, Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern float axNodeEditor_GetNodeZPosition(NodeId nodeId);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetOrderedNodeIds(NodeId* nodes, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_GetScreenSize();
+        public static extern void axNodeEditor_GetScreenSize(Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern int axNodeEditor_GetSelectedLinks(LinkId* links, int size);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
@@ -222,7 +222,7 @@ namespace AxNodeEditorNET
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_Resume();
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
-        public static extern Vector2 axNodeEditor_ScreenToCanvas(Vector2* pos);
+        public static extern void axNodeEditor_ScreenToCanvas(Vector2* pos, Vector2* pOut);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
         public static extern void axNodeEditor_SelectLink(LinkId linkId, byte append);
         [DllImport("cimguinodeeditor", CallingConvention = CallingConvention.Cdecl)]
