@@ -4,6 +4,21 @@ namespace AxNodeEditorNET
 {
     public partial struct NodeId
     {
+        public bool Equals(NodeId other)
+        {
+            return this == other;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is NodeId other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return ((IntPtr)this).GetHashCode();
+        }
+
         public static unsafe implicit operator NodeId(uint index)
         {
             return new NodeId() {
@@ -30,6 +45,16 @@ namespace AxNodeEditorNET
                     }
                 }
             };
+        }
+
+        public static bool operator ==(in NodeId a, in NodeId b)
+        {
+            return (IntPtr)a == (IntPtr)b;
+        }
+
+        public static bool operator !=(NodeId a, NodeId b)
+        {
+            return !(a == b);
         }
     }
 }
