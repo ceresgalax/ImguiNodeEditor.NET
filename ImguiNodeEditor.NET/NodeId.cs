@@ -30,7 +30,7 @@ namespace AxNodeEditorNET
             };
         }
 
-        public static unsafe implicit operator NodeId(IntPtr index)
+        public static unsafe explicit operator NodeId(IntPtr index)
         {
             return new NodeId() {
                 _base_Details_SafePointerType_NodeId = new Details_SafePointerType_NodeId() {
