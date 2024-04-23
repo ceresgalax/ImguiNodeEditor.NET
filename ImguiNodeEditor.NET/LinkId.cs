@@ -42,6 +42,10 @@ namespace AxNodeEditorNET
                 }
             };
         }
-        
+
+        public override string ToString()
+        {
+            return ((IntPtr)this).ToString();
+        }
     }
 }
