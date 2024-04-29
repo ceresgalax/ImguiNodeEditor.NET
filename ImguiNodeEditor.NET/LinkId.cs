@@ -3,7 +3,18 @@
 namespace AxNodeEditorNET
 {
     public partial struct LinkId
-    {        
+    {      
+        public static unsafe explicit operator LinkId(int index)
+        {
+            return new LinkId() {
+                _base_Details_SafePointerType_LinkId = new Details_SafePointerType_LinkId() {
+                    _base_Details_SafeType_voidptr_LinkId = new Details_SafeType_voidptr_LinkId() {
+                        m_Value = (void*)index
+                    }
+                }
+            };
+        }
+        
         public static unsafe explicit operator LinkId(uint index)
         {
             return new LinkId() {

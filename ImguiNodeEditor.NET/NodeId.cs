@@ -19,6 +19,17 @@ namespace AxNodeEditorNET
             return ((IntPtr)this).GetHashCode();
         }
 
+        public static unsafe explicit operator NodeId(int index)
+        {
+            return new NodeId() {
+                _base_Details_SafePointerType_NodeId = new Details_SafePointerType_NodeId() {
+                    _base_Details_SafeType_voidptr_NodeId = new Details_SafeType_voidptr_NodeId() {
+                        m_Value = (void*)index
+                    }
+                }
+            };
+        }
+        
         public static unsafe explicit operator NodeId(uint index)
         {
             return new NodeId() {
@@ -40,7 +51,7 @@ namespace AxNodeEditorNET
                 }
             };
         }
-
+        
         public static unsafe explicit operator IntPtr(NodeId id)
         {
             return (IntPtr)id._base_Details_SafePointerType_NodeId._base_Details_SafeType_voidptr_NodeId.m_Value;
