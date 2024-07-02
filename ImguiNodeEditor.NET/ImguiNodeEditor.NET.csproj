@@ -13,7 +13,7 @@
         <PackageVersion>$(AssemblyVersion)$(PackagePrereleaseIdentifier)</PackageVersion>
         <PackageTags>ImguiNodeEditor ImGui ImGui.NET Immediate Mode GUI</PackageTags>
         <PackageProjectUrl>https://github.com/ceresgalax/ImguiNodeEditor.NET</PackageProjectUrl>
-        <DocumentationFile Condition="'$(Configuration)' == 'Release'">$(OutputPath)\ImguiNodeEditor.NET.xml</DocumentationFile>
+<!--                <DocumentationFile Condition="'$(Configuration)' == 'Release'">$(OutputPath)\ImguiNodeEditor.NET.xml</DocumentationFile>-->
         <RootNamespace>AxNodeEditorNET</RootNamespace>
     </PropertyGroup>
 
