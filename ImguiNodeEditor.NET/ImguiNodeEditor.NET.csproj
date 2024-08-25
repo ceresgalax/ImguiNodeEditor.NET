@@ -23,87 +23,9 @@
     <ItemGroup Condition="'$(ImGuiNetProjectPath)' != ''">
         <ProjectReference Include="$(ImGuiNetProjectPath)\src\ImGui.NET\ImGui.NET.csproj" />
     </ItemGroup>
-
-    <!--
-    Shared Properties for Native Builds
-    -->
-    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
-        <CurrentPlatformRidOs>osx</CurrentPlatformRidOs>
-        <CurrentPlatformDllExtension>.dylib</CurrentPlatformDllExtension>
-        <CurrentPlatformBuildOutputDirPostfix /> <!-- Empty String -->
-    </PropertyGroup>
-    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
-        <CurrentPlatformRidOs>win</CurrentPlatformRidOs>
-        <CurrentPlatformDllExtension>.dll</CurrentPlatformDllExtension>
-        <CurrentPlatformBuildOutputDirPostfix>\$(Configuration)</CurrentPlatformBuildOutputDirPostfix>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
-        <CmakeOsxArchitectures>x86_64</CmakeOsxArchitectures>
-        <CurrentPlatformRid>$(CurrentPlatformRidOs)-x64</CurrentPlatformRid>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'ARM64'">
-        <CmakeOsxArchitectures>arm64</CmakeOsxArchitectures>
-        <CurrentPlatformRid>$(CurrentPlatformRidOs)-arm64</CurrentPlatformRid>
-    </PropertyGroup>
     
-    <!-- 
-    CimguiNodeEditor Native library build target 
-    -->
     <ItemGroup>
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\CMakeLists.txt" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\*.c" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\*.cpp" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\*.h" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui\**\*.cpp" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui\**\*.c" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui\**\*.h" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui-node-editor\**\*.cpp" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui-node-editor\**\*.c" />
-        <CImguiNodeEditorSrcFiles Include="$(MSBuildThisFileDirectory)\..\CImguiNodeEditor\imgui-node-editor\**\*.h" />
+        <ProjectReference Include="$(MSBuildThisFileDirectory)..\ImguiNodeEditorBinaries\ImguiNodeEditorBinaries.csproj" />
     </ItemGroup>
 
-    <PropertyGroup>
-        <CImguiNodeEditorLibFilename>cimguinodeeditor$(CurrentPlatformDllExtension)</CImguiNodeEditorLibFilename>
-        <CImguiNodeEditorSourceDir>$(MSBuildThisFileDirectory)\..\CImguiNodeEditor</CImguiNodeEditorSourceDir>
-        <CImguiNodeEditorBuildDir>cimguinodeeditorbuild</CImguiNodeEditorBuildDir>
-        <CImguiNodeEditorBuildOutputDir>$(CImguiNodeEditorBuildDir)$(CurrentPlatformBuildOutputDirPostfix)</CImguiNodeEditorBuildOutputDir>
-    </PropertyGroup>
-
-    <Target Name="CImguiNodeEditorNativeInner" Inputs="@(CImguiNodeEditorSrcFiles)" Outputs="$(IntermediateOutputPath)$(CImguiNodeEditorBuildDir)\$(CImguiNodeEditorLibFilename);"
-            BeforeTargets="BeforeBuild"
-            Condition="'$(TargetFramework)' == 'once'"
-    >
-        <Message Importance="high" Text="Target framework: $(TargetFramework)" />
-        <Message Importance="high" Text="Intermediate Output Dir: $(IntermediateOutputPath)" />
-        <Message Importance="high" Text="Build Dir: $(CImguiNodeEditorBuildDir)" />
-        <Message Importance="high" Text="Output Dir: $(CImguiNodeEditorBuildOutputDir)" />
-        <Message Importance="high" Text="$(CImguiNodeEditorBuildOutputDir)\$(CImguiNodeEditorLibFilename)" />
-        <MakeDir Directories="$(CImguiNodeEditorBuildDir)" />
-        <Exec WorkingDirectory="$(CImguiNodeEditorBuildDir)" Command="cmake $(CImguiNodeEditorSourceDir) &quot;-DCMAKE_OSX_ARCHITECTURES=$(CmakeOsxArchitectures)&quot; -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=$(Configuration)" />
-        <Exec WorkingDirectory="$(CImguiNodeEditorBuildDir)" Command="cmake --build . --config $(Configuration) -j" />
-    </Target>
-
-    <Target Name="CImguiNodeEditorNative" BeforeTargets="BeforeBuild;DispatchToInnerBuilds">
-        <PropertyGroup>
-            <CImguiNodeEditorBuildDir>$(BaseIntermediateOutputPath)$(CImguiNodeEditorBuildDir)</CImguiNodeEditorBuildDir>
-            <CImguiNodeEditorBuildOutputDir>$(BaseIntermediateOutputPath)$(CImguiNodeEditorBuildOutputDir)</CImguiNodeEditorBuildOutputDir>
-        </PropertyGroup>
-
-        <!--TargetFramework=once is critical here, as msbuild will not execute a task from same project with same properties twice. -->
-        <MSBuild Projects="$(MSBuildProjectFile)" Targets="CImguiNodeEditorNativeInner" Properties="TargetFramework=once;CImguiNodeEditorBuildDir=$(CImguiNodeEditorBuildDir);CImguiNodeEditorBuildOutputDir=$(CImguiNodeEditorBuildOutputDir)" />
-
-        <ItemGroup>
-            <_ImGuiLibs Include="$(CImguiNodeEditorBuildOutputDir)\$(CImguiNodeEditorLibFilename)" />
-            <Content Include="@(_ImGuiLibs)">
-                <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-                <PublishState>Included</PublishState>
-                <Link>runtimes\$(CurrentPlatformRid)\native\%(Filename)%(Extension)</Link>
-            </Content>
-        </ItemGroup>
-    </Target>
-
-    <!-- End CimguiNodeEditor Native Library build target -->
-    
 </Project>

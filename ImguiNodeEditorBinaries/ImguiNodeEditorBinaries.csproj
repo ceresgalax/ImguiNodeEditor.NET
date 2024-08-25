@@ -1,0 +1,80 @@
+﻿<Project Sdk="Microsoft.Build.NoTargets/3.7.56" >
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework> <!-- Lowest common denominator -->
+        <SkipCopyBuildProject>false</SkipCopyBuildProject> <!-- We need to copy things! -->
+    </PropertyGroup>
+
+    <!--
+    Shared Properties for Native Builds
+    -->
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('OSX'))">
+        <CurrentPlatformRidOs>osx</CurrentPlatformRidOs>
+        <CurrentPlatformDllExtension>.dylib</CurrentPlatformDllExtension>
+        <CurrentPlatformBuildOutputDirPostfix /> <!-- Empty String -->
+    </PropertyGroup>
+    <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Windows'))">
+        <CurrentPlatformRidOs>win</CurrentPlatformRidOs>
+        <CurrentPlatformDllExtension>.dll</CurrentPlatformDllExtension>
+        <CurrentPlatformBuildOutputDirPostfix>$(Configuration)\</CurrentPlatformBuildOutputDirPostfix>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'X64'">
+        <CmakeOsxArchitectures>x86_64</CmakeOsxArchitectures>
+        <CurrentPlatformRid>$(CurrentPlatformRidOs)-x64</CurrentPlatformRid>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)' == 'ARM64'">
+        <CmakeOsxArchitectures>arm64</CmakeOsxArchitectures>
+        <CurrentPlatformRid>$(CurrentPlatformRidOs)-arm64</CurrentPlatformRid>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\CMakeLists.txt" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.c" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.cpp" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.h" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.cpp" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.c" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.h" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.cpp" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.c" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.h" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <NativeLibFilename>cimguinodeeditor$(CurrentPlatformDllExtension)</NativeLibFilename>
+        <NativeSourceDir>$(MSBuildThisFileDirectory)..\CImguiNodeEditor</NativeSourceDir>
+        <NativeBuildDir>cimguinodeeditorbuild</NativeBuildDir>
+        <NativeBuildOutputDir>$(NativeBuildDir)\$(CurrentPlatformBuildOutputDirPostfix)</NativeBuildOutputDir>
+    </PropertyGroup>
+
+    <Target Name="BuildNativeLibs"
+        Inputs="@(NativeSrcFiles)"
+        Outputs="$(IntermediateOutputPath)$(NativeBuildOutputDir)$(NativeLibFilename)"
+        BeforeTargets="BeforeBuild"
+    >
+        <Message Importance="high" Text="$(IntermediateOutputPath)$(NativeBuildOutputDir)$(NativeLibFilename)" />
+        
+        <PropertyGroup>
+            <BuildDir>$(IntermediateOutputPath)$(NativeBuildDir)</BuildDir>
+            <BuildOutputDir>$(IntermediateOutputPath)$(NativeBuildOutputDir)</BuildOutputDir>
+        </PropertyGroup>
+
+        <MakeDir Directories="$(BuildDir)" />
+        <Exec WorkingDirectory="$(BuildDir)" Command="cmake $(NativeSourceDir) &quot;-DCMAKE_OSX_ARCHITECTURES=$(CmakeOsxArchitectures)&quot; -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=$(Configuration)" />
+        <Exec WorkingDirectory="$(BuildDir)" Command="cmake --build . --config $(Configuration) -j" />
+
+        <ItemGroup>
+            <_ImGuiLibs Include="$(BuildOutputDir)\$(NativeLibFilename)" />
+            <Content Include="@(_ImGuiLibs)">
+                <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+                <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+                <PublishState>Included</PublishState>
+                <Link>runtimes\$(CurrentPlatformRid)\native\%(Filename)%(Extension)</Link>
+            </Content>
+        </ItemGroup>
+        
+        <ItemGroup>
+            <FileWrites Include="$(BuildDir)\**\*" />
+        </ItemGroup>
+    </Target>
+</Project>
