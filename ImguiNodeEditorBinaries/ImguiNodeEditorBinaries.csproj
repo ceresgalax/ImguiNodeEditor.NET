@@ -32,9 +32,9 @@
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.c" />
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.cpp" />
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\*.h" />
-        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.cpp" />
-        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.c" />
-        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui\**\*.h" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\cimgui\imgui\**\*.cpp" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\cimgui\imgui\**\*.c" />
+        <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\cimgui\imgui\**\*.h" />
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.cpp" />
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.c" />
         <NativeSrcFiles Include="$(MSBuildThisFileDirectory)..\CImguiNodeEditor\imgui-node-editor\**\*.h" />
