@@ -56,6 +56,11 @@ namespace AxNodeEditorNET
         {
             return (IntPtr)id._base_Details_SafePointerType_NodeId._base_Details_SafeType_voidptr_NodeId.m_Value;
         }
+        
+        public static unsafe explicit operator uint(NodeId id)
+        {
+            return (uint)id._base_Details_SafePointerType_NodeId._base_Details_SafeType_voidptr_NodeId.m_Value;
+        }
 
         public static unsafe NodeId operator ++(in NodeId id)
         {
