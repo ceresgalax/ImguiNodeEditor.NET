@@ -52,6 +52,11 @@ namespace AxNodeEditorNET
         {
             return (IntPtr)id._base_Details_SafePointerType_PinId._base_Details_SafeType_voidptr_PinId.m_Value;
         }
+        
+        public static unsafe explicit operator uint(PinId id)
+        {
+            return (uint)id._base_Details_SafePointerType_PinId._base_Details_SafeType_voidptr_PinId.m_Value;
+        }
 
         public static unsafe PinId operator ++(in PinId id)
         {
