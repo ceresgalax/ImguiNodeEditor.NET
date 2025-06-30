@@ -41,6 +41,11 @@ namespace AxNodeEditorNET
         {
             return (IntPtr)id._base_Details_SafePointerType_LinkId._base_Details_SafeType_voidptr_LinkId.m_Value;
         }
+        
+        public static unsafe explicit operator uint(LinkId id)
+        {
+            return (uint)id._base_Details_SafePointerType_LinkId._base_Details_SafeType_voidptr_LinkId.m_Value;
+        }
 
         public static unsafe LinkId operator ++(in LinkId id)
         {
